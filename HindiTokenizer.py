@@ -6,8 +6,10 @@ class Tokenizer():
 
 	def __init__(self,text=None):
 		if text is  not None:
-			self.text=text.decode('utf-8')
-			self.clean_text()
+              #Begin with Python 3, all string is unicode object.
+			#self.text=text.decode('utf-8')
+                    self.text=text
+                    self.clean_text()
 		else:
 			self.text=None
 		self.sentences=[]
@@ -15,7 +17,7 @@ class Tokenizer():
 		self.stemmed_word=[]
 		self.final_list=[]
 		#self.final_tokens=[]
-	
+
 
 	def read_from_file(self,filename):
 		f=codecs.open(filename,encoding='utf-8')
@@ -32,10 +34,10 @@ class Tokenizer():
 	def print_sentences(self,sentences=None):
 		if sentences:
 			for i in sentences:
-				print i.encode('utf-8')
+				print(i.encode('utf-8'))
 		else:
 			for i in self.sentences:
-				print i.encode('utf-8')
+				print(i.encode('utf-8'))
 
 
 	def clean_text(self):
@@ -59,7 +61,7 @@ class Tokenizer():
 
 		tokens=filter(lambda tok: tok.strip(),self.tokens)
 		self.tokens=tokens
-		
+
 	def hyphenated_tokens(self):
 
 		for each in self.tokens:
@@ -91,10 +93,10 @@ class Tokenizer():
 		'''done'''
 		if print_list is None:
 			for i in self.tokens:
-				print i.encode('utf-8')
+				print(i.encode('utf-8'))
 		else:
 			for i in print_list:
-				print i.encode('utf-8')
+				print(i.encode('utf-8'))
 
 
 	def tokens_count(self):
@@ -137,7 +139,7 @@ class Tokenizer():
 	def print_freq_dict(self,freq):
 		'''done'''
 		for i in freq.keys():
-			print i.encode('utf-8'),',',freq[i]
+			print(i.encode('utf-8'),',',freq[i])
 
 	def generate_stem_words(self,word):
 		suffixes = {
@@ -145,14 +147,14 @@ class Tokenizer():
     2: [u"कर",u"ाओ",u"िए",u"ाई",u"ाए",u"ने",u"नी",u"ना",u"ते",u"ीं",u"ती",u"ता",u"ाँ",u"ां",u"ों",u"ें"],
     3: [u"ाकर",u"ाइए",u"ाईं",u"ाया",u"ेगी",u"ेगा",u"ोगी",u"ोगे",u"ाने",u"ाना",u"ाते",u"ाती",u"ाता",u"तीं",u"ाओं",u"ाएं",u"ुओं",u"ुएं",u"ुआं"],
     4: [u"ाएगी",u"ाएगा",u"ाओगी",u"ाओगे",u"एंगी",u"ेंगी",u"एंगे",u"ेंगे",u"ूंगी",u"ूंगा",u"ातीं",u"नाओं",u"नाएं",u"ताओं",u"ताएं",u"ियाँ",u"ियों",u"ियां"],
-    5: [u"ाएंगी",u"ाएंगे",u"ाऊंगी",u"ाऊंगा",u"ाइयाँ",u"ाइयों",u"ाइयां"],
+    5: [u"ाएंगी",u"ाएंगे",u"ाऊंगी",u"ाऊंगा",u"ाइयाँ",u"ाइयों",u"ाइयां",u"ातीय"],
 }
 		for L in 5, 4, 3, 2, 1:
 			if len(word) > L + 1:
 				for suf in suffixes[L]:
-					#print type(suf),type(word),word,suf
+					#print(type(suf),type(word),word,suf
 					if word.endswith(suf):
-						#print 'h'
+						#print('h'
 						return word[:-L]
 		return word
 
@@ -170,12 +172,12 @@ class Tokenizer():
 		if not self.tokens:
 			self.tokenize()
 		for each_token in self.tokens:
-			#print type(each_token)
+			#print(type(each_token)
 			temp=self.generate_stem_words(each_token)
-			#print temp
+			#print(temp
 			stem_word[each_token]=temp
 			self.stemmed_word.append(temp)
-			
+
 		return stem_word
 
 	def remove_stop_words(self):
@@ -192,9 +194,9 @@ if __name__=="__main__":
 	t=Tokenizer('''वाशिंगटन: दुनिया के सबसे शक्तिशाली देश के राष्ट्रपति बराक ओबामा ने प्रधानमंत्री नरेंद्र मोदी के संदर्भ में 'टाइम' पत्रिका में लिखा, "नरेंद्र मोदी ने अपने बाल्यकाल में अपने परिवार की सहायता करने के लिए अपने पिता की चाय बेचने में मदद की थी। आज वह दुनिया के सबसे बड़े लोकतंत्र के नेता हैं और गरीबी से प्रधानमंत्री तक की उनकी जिंदगी की कहानी भारत के उदय की गतिशीलता और क्षमता को परिलक्षित करती है।''')
 	#t=Tokenizer()
 	#t.read_from_file('sample.txt')
-	#print type(t.text)
+	#print(type(t.text)
 	#y=clean(t.text)
-	#print y
+	#print(y
 	t.generate_sentences()
 	#t.print_sentences()
 	t.tokenize()
@@ -205,7 +207,7 @@ if __name__=="__main__":
 	#t.print_sentences(s)
 	f=t.generate_stem_dict()
 	# for i in f.keys():
-	# 	print i.encode('utf-8'),f[i].encode('utf-8')
+	# 	print(i.encode('utf-8'),f[i].encode('utf-8')
 	z=t.remove_stop_words()
 	t.print_tokens(t.final_tokens)
-	print t.sentence_count(),t.tokens_count(),t.len_text()
+	print(t.sentence_count(),t.tokens_count(),t.len_text())

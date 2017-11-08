@@ -1,4 +1,4 @@
-Tokenizer for Hindi
+Tokenizer for Hindi for Python 3 and above.
 
 This package tends to implement a Tokenizer and a stemmer for Hindi language.
 
@@ -100,7 +100,7 @@ Given a word, this will generate its stem word.
 
 
 ```python
-word=t.generate_stem_word("भारतीय")
+word=t.generate_stem_words("भारतीय")
 print word
 भारत
 ```
@@ -166,4 +166,3 @@ Given a text, and a word, it will print all the sentences where that word is occ
 sentences=t.concordace("हिन्दी")
 t.print_sentences(sentences)
 ```
-
